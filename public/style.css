@@ -3,3 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  cursor: url("../cursors/cursor-normal.png"), default !important;
+  background-color: rgb(60, 63, 82);
+  background: url("../images/background-highres.jpg") top/cover no-repeat fixed,
+    url("../images/background-lowres.jpg") top/cover no-repeat fixed;
+}
+
+button,
+a {
+  cursor: url("../cursors/cursor-pointer.png"), pointer !important;
+}
+
+input {
+  cursor: url("../cursors/cursor-text.png"), text !important;
+}
