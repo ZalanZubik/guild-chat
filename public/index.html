@@ -3,42 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="favicon/favicon-16x16.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <link rel="stylesheet" href="/style.css" />
-    <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <title>Guild Chat</title>
   </head>
   <body>
     <!-- Login -->
-    <div
-      class="h-screen container flex flex-col justify-center items-center text-center m-auto"
-      id="login"
-    >
-      <form
-        class="xl:w-2/5 rounded border-solid p-4 shadow-md bg-white"
-        id="login-form"
-      >
-        <h1 class="text-3xl">Welcome to Guild Chat!</h1>
+    <div class="h-screen container flex flex-col justify-center items-center text-center m-auto" id="login">
+      <form class="xl:w-2/5 rounded border-solid p-4 shadow-md bg-white" id="login-form">
+        <h1 class="text-4xl">Welcome to Guild Chat!</h1>
         <div>
           <h2>Username</h2>
           <input
@@ -49,43 +26,69 @@
             maxlength="10"
             autocomplete="off"
             required
+            autofocus
           />
         </div>
         <div>
           <h2>Channel</h2>
           <select id="channel" class="d-block w-3/4 p-2 mb-4 border shadow">
+            <option value="Central Tyria">Central Tyria</option>
+            <option value="Living World: Icebrood Saga">Living World: Icebrood Saga</option>
+            <option value="Living World: Season 4">Living World: Season 4</option>
             <option value="Path of Fire">Path of Fire</option>
+            <option value="Living World: Season 3">Living World: Season 3</option>
+            <option value="Heart of Thorns">Heart of Thorns</option>
+            <option value="Player vs. Player">Player vs. Player</option>
+            <option value="World vs. World">World vs. World</option>
             <option value="Dungeons">Dungeons</option>
+            <option value="Fractals of the Mists">Fractals of the Mists</option>
             <option value="Raids">Raids</option>
-            <option value="Strike Mission">Strike Mission</option>
+            <option value="Strike Missions">Strike Missions</option>
+            <option value="Festivals">Festivals</option>
+            <option value="Guild Recruitment">Guild Recruitment</option>
           </select>
         </div>
-        <button
-          type="submit"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-        >
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-teal-100 font-bold py-2 px-4 border border-blue-700 rounded">
           Join Chat
         </button>
       </form>
     </div>
 
     <!-- Chat -->
-    <div
-      class="h-screen container flex flex-col justify-center items-center text-center m-auto hidden"
-      id="chat"
-    >
-      <form class="xl:w-3/4 rounded border-solid p-4 shadow-md" id="chat-form">
-        <input
-          class="d-block w-3/4 p-2 mb-4 border shadow"
-          id="message"
-          type="text"
-          placeholder="Enter message..."
-          autocomplete="off"
-          required
-        />
-      </form>
+    <div class="h-screen flex flex-col justify-center items-center m-auto hidden" id="chat">
+      <div class="xl:w-8/12 rounded border-solid shadow-md bg-teal-800 text-teal-100">
+        <div class="grid grid-cols-5">
+          <div class="chat-height col-span-1 pt-3 pl-3 overflow-y-auto">
+            <h2 class="text-3xl pl-1">Channels</h2>
+            <h3 class="text-xl p-1">Central Tyria</h3>
+            <h3 class="text-xl p-1">Icebrood Saga</h3>
+            <h3 class="text-xl p-1">Living World: Season 4</h3>
+            <h3 class="text-xl p-1">Path of Fire</h3>
+            <h3 class="text-xl p-1">Living World: Season 3</h3>
+            <h3 class="text-xl p-1">Heart of Thorns</h3>
+            <h3 class="text-xl p-1">Player vs. Player</h3>
+            <h3 class="text-xl p-1">World vs. World</h3>
+            <h3 class="text-xl p-1">Dungeons</h3>
+            <h3 class="text-xl p-1">Fractals of the Mists</h3>
+            <h3 class="text-xl p-1">Raids</h3>
+            <h3 class="text-xl p-1">Strike Missions</h3>
+            <h3 class="text-xl p-1">Festivals</h3>
+            <h3 class="text-xl p-1">Guild Recruitment</h3>
+          </div>
+          <div class="chat-height col-span-3 bg-teal-700 p-4 pr-2 flex flex-col justify-between">
+            <div class="chat-messages overflow-y-auto"></div>
+            <form id="chat-form" class="text-center text-teal-100">
+              <input class="d-block w-4/5 p-2 shadow rounded bg-teal-600" id="message" type="text" placeholder="Enter message..." autocomplete="off" required />
+            </form>
+          </div>
+          <div class="chat-height col-span-1 pt-3 pl-4 overflow-y-auto">
+            <h2 class="text-3xl" id="online-number"></h2>
+            <ul id="users">
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js" defer></script>
   </body>

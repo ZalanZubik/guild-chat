@@ -5,7 +5,9 @@
 - Node.js
 - Express
 - Socket.io
+- Moment.js
 - Tailwind CSS
+- CSS
 - Nodemon
 
 ## About
