@@ -6,22 +6,27 @@ const chat = document.getElementById('chat');
 const chatMessages = document.querySelector('.chat-messages');
 const onlineUsers = document.getElementById('users');
 const onlineNumber = document.getElementById('online-number');
+const channelName = document.getElementById('channel-name');
 
 loginForm.addEventListener('submit', e => {
   e.preventDefault();
   const username = e.target['name'].value;
-  const channel = e.target['channel'].value;
 
   if (username) {
     // Connecting the socket
     socket = window.io();
 
     // User joins a channel
-    socket.emit('user-join', username, channel);
+    socket.emit('user-join', username);
 
-    // Get all users from server
-    socket.on('get-users', users => {
+    /*     // Get all users from server
+        socket.on('get-users', users => {
+          updateUsers(users);
+        }); */
+
+    socket.on('channel-users', ({ channel, users }) => {
       updateUsers(users);
+      updateChannelName(channel);
     });
 
     // Message from server
@@ -64,4 +69,15 @@ function updateUsers(users) {
   ${users.map(user => `<li class="pb-1">${user.username}</li>`).join('')}
   `;
   onlineNumber.innerHTML = `<span>Online – ${users.length}</span>`;
+}
+
+function updateChannelName(channel) {
+  channelName.innerText = channel;
+};
+
+function changeChannel() {
+  const newChannel = event.target.value;
+  socket.emit('change-channel', newChannel);
+/*   event.target.classList.add('text-green-600'); */
+  document.querySelector('.chat-messages').innerHTML = '';
 }
