@@ -27,6 +27,10 @@ input {
   cursor: url("../cursors/cursor-text.png"), text !important;
 }
 
+.disabled-input {
+  cursor: url("../cursors/cursor-disabled.png"), not-allowed !important;
+}
+
 .chat-height {
   height: 72vh;
 }

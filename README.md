@@ -8,6 +8,7 @@
 - Moment.js
 - Tailwind CSS
 - CSS
+- Emoji Button
 - Nodemon
 
 ## About

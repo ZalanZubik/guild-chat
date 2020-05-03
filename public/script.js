@@ -16,13 +16,7 @@ loginForm.addEventListener('submit', e => {
     // Connecting the socket
     socket = window.io();
 
-    // User joins a channel
     socket.emit('user-join', username);
-
-    /*     // Get all users from server
-        socket.on('get-users', users => {
-          updateUsers(users);
-        }); */
 
     socket.on('channel-users', ({ channel, users }) => {
       updateUsers(users);
@@ -68,7 +62,7 @@ function updateUsers(users) {
   onlineUsers.innerHTML = `
   ${users.map(user => `<li class="pb-1">${user.username}</li>`).join('')}
   `;
-  onlineNumber.innerHTML = `<span>Online – ${users.length}</span>`;
+  onlineNumber.innerHTML = `<span class="text-3xl">Online – ${users.length}</span>`;
 }
 
 function updateChannelName(channel) {
@@ -78,6 +72,27 @@ function updateChannelName(channel) {
 function changeChannel() {
   const newChannel = event.target.value;
   socket.emit('change-channel', newChannel);
-/*   event.target.classList.add('text-green-600'); */
   document.querySelector('.chat-messages').innerHTML = '';
+  document.getElementById("message").classList.remove('disabled-input');
+  document.getElementById("message").removeAttribute('disabled');
+  document.getElementById("emoji-btn").classList.remove('disabled-input');
+  document.getElementById("emoji-btn").removeAttribute('disabled');
+  document.getElementById("message").focus();
 }
+
+// Emoji
+const emojiBtn = document.getElementById('emoji-btn');
+const picker = new EmojiButton({
+  theme: 'dark',
+  recentsCount: '10',
+  emojisPerRow: '6',
+  emojiSize: '1.5rem'
+});
+
+picker.on('emoji', emoji => {
+  document.getElementById('message').value += emoji;
+});
+
+emojiBtn.addEventListener('click', () => {
+  picker.togglePicker(emojiBtn);
+});

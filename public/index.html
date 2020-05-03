@@ -23,6 +23,7 @@
             id="name"
             class="d-block w-3/4 p-2 mb-4 border shadow"
             placeholder="Enter username..."
+            minlength="3"
             maxlength="10"
             autocomplete="off"
             required
@@ -48,37 +49,39 @@
           </div>
         </div>
         <div class="grid grid-cols-5">
-          <div class="chat-height col-span-1 pt-3 pl-3 overflow-y-auto">
-            <h2 class="text-3xl pl-1">Channels</h2>
-            <button onclick="changeChannel()" value="Central Tyria" class="text-xl p-1 hover:text-green-600 block">Central Tyria</button>
-            <button onclick="changeChannel()" value="Icebrood Saga" class="text-xl p-1 hover:text-green-600 block">Icebrood Saga</button>
-            <button onclick="changeChannel()" value="Living World: Season 4" class="text-xl p-1 hover:text-green-600 block">Living World: Season 4</button>
-            <button onclick="changeChannel()" value="Path of Fire" class="text-xl p-1 hover:text-green-600 block">Path of Fire</button>
-            <button onclick="changeChannel()" value="Living World: Season 3" class="text-xl p-1 hover:text-green-600 block">Living World: Season 3</button>
-            <button onclick="changeChannel()" value="Heart of Thorns" class="text-xl p-1 hover:text-green-600 block">Heart of Thorns</button>
-            <button onclick="changeChannel()" value="Player vs. Player" class="text-xl p-1 hover:text-green-600 block">Player vs. Player</button>
-            <button onclick="changeChannel()" value="World vs. World" class="text-xl p-1 hover:text-green-600 block">World vs. World</button>
-            <button onclick="changeChannel()" value="Dungeons" class="text-xl p-1 hover:text-green-600 block">Dungeons</button>
-            <button onclick="changeChannel()" value="Fractals of the Mists" class="text-xl p-1 hover:text-green-600 block">Fractals of the Mists</button>
-            <button onclick="changeChannel()" value="Raids" class="text-xl p-1 hover:text-green-600 block">Raids</button>
-            <button onclick="changeChannel()" value="Strike Missions" class="text-xl p-1 hover:text-green-600 block">Strike Missions</button>
-            <button onclick="changeChannel()" value="Festivals" class="text-xl p-1 hover:text-green-600 block">Festivals</button>
-            <button onclick="changeChannel()" value="Guild Recruitment" class="text-xl p-1 hover:text-green-600 block">Guild Recruitment</button>
+          <div class="chat-height col-span-1 pt-3 pl-2 overflow-y-auto">
+            <h2 class="text-3xl pl-2">Channels</h2>
+            <button onclick="changeChannel()" value="Central Tyria" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Central_Tyria_icon.png"></img>Central Tyria</button>
+            <button onclick="changeChannel()" value="Icebrood Saga" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Icebrood_Saga_icon.png"></img>Icebrood Saga</button>
+            <button onclick="changeChannel()" value="Path of Fire" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_PoF_icon.png"></img>Path of Fire</button>
+            <button onclick="changeChannel()" value="Heart of Thorns" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_HoT_icon.png"></img>Heart of Thorns</button>
+            <button onclick="changeChannel()" value="Player vs. Player" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_PvP_icon.png"></img>Player vs. Player</button>
+            <button onclick="changeChannel()" value="World vs. World" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_WvW_icon.png"></img>World vs. World</button>
+            <button onclick="changeChannel()" value="Dungeons" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Dungeons_icon.png"></img>Dungeons</button>
+            <button onclick="changeChannel()" value="Fractals of the Mists" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Fractals_icon.png"></img>Fractals of the Mists</button>
+            <button onclick="changeChannel()" value="Raids" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Raids_icon.png"></img>Raids</button>
+            <button onclick="changeChannel()" value="Strike Missions" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Strikes_icon.png"></img>Strike Missions</button>
+            <button onclick="changeChannel()" value="Festivals" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Festivals_icon.png"></img>Festivals</button>
+            <button onclick="changeChannel()" value="Guild Recruitment" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Guild_icon.png"></img>Guild Recruitment</button>
           </div>
           <div class="chat-height col-span-3 bg-teal-700 p-4 pr-2 flex flex-col justify-between">
             <div class="chat-messages overflow-y-auto"></div>
-            <form id="chat-form" class="text-center text-teal-100">
-              <input class="d-block w-4/5 p-2 shadow rounded bg-teal-600" id="message" type="text" placeholder="Enter message..." autocomplete="off" required />
+            <div class="flex mx-10">
+            <form id="chat-form" class="text-teal-100 w-full">
+              <input class="d-block w-full p-2 shadow rounded bg-teal-600 disabled-input" id="message" type="text" placeholder="Enter message..." autocomplete="off" required disabled />
             </form>
+            <button class="disabled-input w-12 text-3xl" id="emoji-btn" disabled>&#128515;</button>
+            </div>
           </div>
           <div class="chat-height col-span-1 pt-3 pl-4 overflow-y-auto">
-            <h2 class="text-3xl" id="online-number"></h2>
-            <ul id="users"></ul>
+            <h2 class="flex" id="online-number"></h2>
+            <ul class="pl-1" id="users"></ul>
           </div>
         </div>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
     <script src="script.js" defer></script>
   </body>
 </html>

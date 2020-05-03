@@ -30,7 +30,7 @@ io.on('connection', socket => {
     socket.join(user.channel);
 
     socket.emit('message', formatMessage(bot, `Welcome to ${user.channel}! Please select a channel.`));
-    socket.broadcast.to(user.channel).emit('message', formatMessage(bot, `${user.username} has joined the chat.`));
+    socket.broadcast.to(user.channel).emit('message', formatMessage(bot, `${user.username} joined the chat.`));
 
     io.to(user.channel).emit('channel-users', {
       channel: user.channel,
@@ -40,7 +40,9 @@ io.on('connection', socket => {
 
   socket.on('chat-message', message => {
     const user = getUser(socket.id);
-    io.to(user.channel).emit('message', formatMessage(user.username, message));
+    if (user) {
+      io.to(user.channel).emit('message', formatMessage(user.username, message));
+    }
   });
 
   socket.on('change-channel', newChannel => {
@@ -59,13 +61,13 @@ io.on('connection', socket => {
           channel: prevChannel,
           users: getChannelUsers(prevChannel)
         });
-        io.to(prevChannel).emit('message', formatMessage(bot, `${user.username} has left the channel.`));
+        io.to(prevChannel).emit('message', formatMessage(bot, `${user.username} left the channel.`));
       }
 
       socket.join(newChannel);
 
-      socket.emit('message', formatMessage(bot, `Joined to ${newChannel} channel.`));
-      socket.broadcast.to(newChannel).emit('message', formatMessage(bot, `${user.username} has joined the channel.`));
+      socket.emit('message', formatMessage(bot, `You joined to ${newChannel} channel.`));
+      socket.broadcast.to(newChannel).emit('message', formatMessage(bot, `${user.username} joined the channel.`));
 
       io.to(newChannel).emit('channel-users', {
         channel: newChannel,
@@ -79,8 +81,8 @@ io.on('connection', socket => {
     const user = getUser(socket.id);
     users = [...users.filter(user => user.id !== socket.id)];
     if (user) {
-      io.to(user.channel).emit('message', formatMessage(bot, `${user.username} has left the channel.`));
-      io.to(lobby).emit('message', formatMessage(bot, `${user.username} has left the chat.`));
+      io.to(user.channel).emit('message', formatMessage(bot, `${user.username} left the channel.`));
+      io.to(lobby).emit('message', formatMessage(bot, `${user.username} left the chat.`));
       io.to(user.channel).emit('channel-users', {
         channel: user.channel,
         users: getChannelUsers(user.channel)
