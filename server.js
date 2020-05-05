@@ -29,7 +29,8 @@ io.on('connection', socket => {
 
     socket.join(user.channel);
 
-    socket.emit('message', formatMessage(bot, `Welcome to ${user.channel}! Please select a channel.`));
+    socket.emit('message', formatMessage(bot, `Welcome to ${user.channel}! Please select a channel to start chatting.`));
+    socket.emit('message', formatMessage(bot, 'Guild Chat rules:<br>- Be gentle and respect everyone!<br>- Spam is not allowed in any way!<br>- No racism, no sexual, no political, no religious comments!'));
     socket.broadcast.to(user.channel).emit('message', formatMessage(bot, `${user.username} joined the chat.`));
 
     io.to(user.channel).emit('channel-users', {
@@ -49,30 +50,33 @@ io.on('connection', socket => {
     const user = getUser(socket.id);
     if (user) {
       const prevChannel = user.channel;
-
       const userIndex = users.findIndex(user => user.id == socket.id);
 
-      socket.leave(user.channel);
+      if (prevChannel !== newChannel) {
+        socket.leave(user.channel);
 
-      users[userIndex].channel = newChannel;
+        users[userIndex].channel = newChannel;
 
-      if (prevChannel !== lobby) {
-        io.to(prevChannel).emit('channel-users', {
-          channel: prevChannel,
-          users: getChannelUsers(prevChannel)
+        if (prevChannel !== lobby) {
+          io.to(prevChannel).emit('channel-users', {
+            channel: prevChannel,
+            users: getChannelUsers(prevChannel)
+          });
+        }
+
+        socket.join(newChannel);
+        socket.emit('clear-chat');
+        socket.emit('message', formatMessage(bot, `You joined to ${newChannel} channel.`));
+
+        // socket.broadcast.to(newChannel).emit('message', formatMessage(bot, `${user.username} joined the channel.`));
+
+        io.to(newChannel).emit('channel-users', {
+          channel: newChannel,
+          users: getChannelUsers(newChannel)
         });
-        io.to(prevChannel).emit('message', formatMessage(bot, `${user.username} left the channel.`));
       }
 
-      socket.join(newChannel);
 
-      socket.emit('message', formatMessage(bot, `You joined to ${newChannel} channel.`));
-      socket.broadcast.to(newChannel).emit('message', formatMessage(bot, `${user.username} joined the channel.`));
-
-      io.to(newChannel).emit('channel-users', {
-        channel: newChannel,
-        users: getChannelUsers(newChannel)
-      });
     }
   })
 
@@ -81,7 +85,7 @@ io.on('connection', socket => {
     const user = getUser(socket.id);
     users = [...users.filter(user => user.id !== socket.id)];
     if (user) {
-      io.to(user.channel).emit('message', formatMessage(bot, `${user.username} left the channel.`));
+      // io.to(user.channel).emit('message', formatMessage(bot, `${user.username} left the channel.`));
       io.to(lobby).emit('message', formatMessage(bot, `${user.username} left the chat.`));
       io.to(user.channel).emit('channel-users', {
         channel: user.channel,

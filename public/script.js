@@ -29,6 +29,15 @@ loginForm.addEventListener('submit', e => {
       chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 
+    socket.on('clear-chat', () => {
+      document.querySelector('.chat-messages').innerHTML = '';
+      document.getElementById("message").classList.remove('disabled-input');
+      document.getElementById("message").disabled = false;
+      document.getElementById("emoji-btn").classList.remove('disabled-input');
+      document.getElementById("emoji-btn").disabled = false;
+      document.getElementById("message").focus();
+    })
+
     login.classList.add('hidden');
     chat.classList.remove('hidden');
     document.getElementById("message").focus();
@@ -51,8 +60,8 @@ chatForm.addEventListener('submit', e => {
 function sendToChat(message) {
   const div = document.createElement('div');
   div.classList.add('chat-message');
-  div.innerHTML = `<p><strong class="text-white text-base mr-1">${message.username}</strong> <span class="text-gray-400">${message.time}</span></p>
-  <p class="pr-2">
+  div.innerHTML = `<p><strong class="text-white text-lg mr-1">${message.username}</strong> <span class="text-gray-400">${message.time}</span></p>
+  <p class="pr-2 text-lg">
     ${message.text}
   </p>`;
   document.querySelector('.chat-messages').appendChild(div);
@@ -72,11 +81,6 @@ function updateChannelName(channel) {
 function changeChannel() {
   const newChannel = event.target.value;
   socket.emit('change-channel', newChannel);
-  document.querySelector('.chat-messages').innerHTML = '';
-  document.getElementById("message").classList.remove('disabled-input');
-  document.getElementById("message").removeAttribute('disabled');
-  document.getElementById("emoji-btn").classList.remove('disabled-input');
-  document.getElementById("emoji-btn").removeAttribute('disabled');
   document.getElementById("message").focus();
 }
 

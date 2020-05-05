@@ -15,14 +15,15 @@
     <!-- Login -->
     <div class="h-screen container flex flex-col justify-center items-center text-center m-auto" id="login">
       <form class="xl:w-2/5 rounded border-solid p-4 shadow-md bg-white" id="login-form">
-        <h1 class="text-4xl">Welcome to Guild Chat!</h1>
-        <div>
-          <h2>Username</h2>
+        <img class="w-3/4 mx-auto mt-1" src="/images/chat-logo-colored.png" />
+        <h1 class="text-4xl mt-4">Greetings, Commander!</h1>
+        <div class="w-3/4 mx-auto">
+          <h2 class="d-block text-xl w-3/4 mt-2 text-left">Name</h2>
           <input
             type="text"
             id="name"
-            class="d-block w-3/4 p-2 mb-4 border shadow"
-            placeholder="Enter username..."
+            class="d-block w-full p-2 mb-4 border shadow"
+            placeholder="Enter your username"
             minlength="3"
             maxlength="10"
             autocomplete="off"
@@ -30,10 +31,11 @@
             autofocus
           />
         </div>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-teal-100 font-bold py-2 px-4 border border-blue-700 rounded">
+        <button type="submit" class="bg-teal-600 transition duration-300 hover:bg-teal-700 text-white text-xl py-2 px-5 mt-2 border border-blue-700 rounded">
           Join Chat
         </button>
       </form>
+      
     </div>
 
     <!-- Chat -->
@@ -45,24 +47,24 @@
           </div>
           <h2 id="channel-name" class="col-span-3"></h2>
           <div>
-            <button onclick="location.reload()" class="col-span-1 p-1 hover:text-green-600 outline-none">Leave Chat</button>
+            <button onclick="location.reload()" class="col-span-1 p-1 transition duration-300 hover:text-green-600 outline-none">Leave Chat</button>
           </div>
         </div>
         <div class="grid grid-cols-5">
           <div class="chat-height col-span-1 pt-3 pl-2 overflow-y-auto">
             <h2 class="text-3xl pl-2">Channels</h2>
-            <button onclick="changeChannel()" value="Central Tyria" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Central_Tyria_icon.png"></img>Central Tyria</button>
-            <button onclick="changeChannel()" value="Icebrood Saga" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Icebrood_Saga_icon.png"></img>Icebrood Saga</button>
-            <button onclick="changeChannel()" value="Path of Fire" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_PoF_icon.png"></img>Path of Fire</button>
-            <button onclick="changeChannel()" value="Heart of Thorns" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_HoT_icon.png"></img>Heart of Thorns</button>
-            <button onclick="changeChannel()" value="Player vs. Player" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_PvP_icon.png"></img>Player vs. Player</button>
-            <button onclick="changeChannel()" value="World vs. World" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_WvW_icon.png"></img>World vs. World</button>
-            <button onclick="changeChannel()" value="Dungeons" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Dungeons_icon.png"></img>Dungeons</button>
-            <button onclick="changeChannel()" value="Fractals of the Mists" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Fractals_icon.png"></img>Fractals of the Mists</button>
-            <button onclick="changeChannel()" value="Raids" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Raids_icon.png"></img>Raids</button>
-            <button onclick="changeChannel()" value="Strike Missions" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Strikes_icon.png"></img>Strike Missions</button>
-            <button onclick="changeChannel()" value="Festivals" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Festivals_icon.png"></img>Festivals</button>
-            <button onclick="changeChannel()" value="Guild Recruitment" class="text-2xl flex py-1 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Guild_icon.png"></img>Guild Recruitment</button>
+            <button onclick="changeChannel()" value="Central Tyria" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Central_Tyria_icon.png"></img>Central Tyria</button>
+            <button onclick="changeChannel()" value="Icebrood Saga" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Icebrood_Saga_icon.png"></img>Icebrood Saga</button>
+            <button onclick="changeChannel()" value="Path of Fire" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_PoF_icon.png"></img>Path of Fire</button>
+            <button onclick="changeChannel()" value="Heart of Thorns" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_HoT_icon.png"></img>Heart of Thorns</button>
+            <button onclick="changeChannel()" value="Player vs. Player" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_PvP_icon.png"></img>Player vs. Player</button>
+            <button onclick="changeChannel()" value="World vs. World" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_WvW_icon.png"></img>World vs. World</button>
+            <button onclick="changeChannel()" value="Dungeons" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Dungeons_icon.png"></img>Dungeons</button>
+            <button onclick="changeChannel()" value="Fractals of the Mists" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Fractals_icon.png"></img>Fractals of the Mists</button>
+            <button onclick="changeChannel()" value="Raids" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Raids_icon.png"></img>Raids</button>
+            <button onclick="changeChannel()" value="Strike Missions" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Strikes_icon.png"></img>Strike Missions</button>
+            <button onclick="changeChannel()" value="Festivals" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Festivals_icon.png"></img>Festivals</button>
+            <button onclick="changeChannel()" value="Guild Recruitment" class="text-2xl flex py-1 transition duration-300 hover:text-green-600 w-full"><img class="mr-2" src="/icons/LFG_UI_Guild_icon.png"></img>Guild Recruitment</button>
           </div>
           <div class="chat-height col-span-3 bg-teal-700 p-4 pr-2 flex flex-col justify-between">
             <div class="chat-messages overflow-y-auto"></div>
