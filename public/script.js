@@ -88,7 +88,7 @@ chatForm.addEventListener('submit', e => {
 function sendToChat(message) {
   const div = document.createElement('div');
   div.classList.add('chat-message');
-  div.innerHTML = `<p><strong class="text-white text-lg mr-1">${message.username}</strong> <span class="text-gray-400">${message.time}</span></p>
+  div.innerHTML = `<p><strong class="text-white text-lg mr-1">${message.username}</strong><span class="text-gray-400">${moment().calendar()}</span></p>
   <p class="pr-2 text-lg">
     ${message.text}
   </p>`;
