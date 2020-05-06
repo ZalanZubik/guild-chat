@@ -7,6 +7,9 @@ const chatMessages = document.querySelector('.chat-messages');
 const onlineUsers = document.getElementById('users');
 const onlineNumber = document.getElementById('online-number');
 const channelName = document.getElementById('channel-name');
+const chatMessage = document.getElementById("message");
+const typing = document.getElementById('typing');
+let timeout = 0;
 
 loginForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -17,6 +20,10 @@ loginForm.addEventListener('submit', e => {
     socket = window.io();
 
     socket.emit('user-join', username);
+
+    login.classList.add('hidden');
+    chat.classList.remove('hidden');
+    chatMessage.focus();
 
     socket.on('channel-users', ({ channel, users }) => {
       updateUsers(users);
@@ -30,19 +37,40 @@ loginForm.addEventListener('submit', e => {
     });
 
     socket.on('clear-chat', () => {
-      document.querySelector('.chat-messages').innerHTML = '';
-      document.getElementById("message").classList.remove('disabled-input');
-      document.getElementById("message").disabled = false;
+      chatMessages.innerHTML = '';
+      chatMessage.classList.remove('disabled-input');
+      chatMessage.disabled = false;
       document.getElementById("emoji-btn").classList.remove('disabled-input');
       document.getElementById("emoji-btn").disabled = false;
-      document.getElementById("message").focus();
+      chatMessage.focus();
     })
 
-    login.classList.add('hidden');
-    chat.classList.remove('hidden');
-    document.getElementById("message").focus();
+    socket.on('user-typing', (isTyping, username) => {
+      if (isTyping == true) {
+        if (typing.innerHTML == '') {
+          typing.innerHTML = `<p>${username} is typing a message...</p>`;
+        }
+      } else {
+        typing.innerHTML = '';
+      }
+    });
   }
 });
+
+chatMessage.addEventListener('keypress', (e) => {
+  if (e.which !== 13) {
+    socket.emit('user-typing', true);
+    clearTimeout(timeout);
+    timeout = setTimeout(notTyping, 2000);
+  } else {
+    clearTimeout(timeout);
+    notTyping();
+  }
+});
+
+function notTyping() {
+  socket.emit('user-typing', false);
+}
 
 chatForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -64,7 +92,7 @@ function sendToChat(message) {
   <p class="pr-2 text-lg">
     ${message.text}
   </p>`;
-  document.querySelector('.chat-messages').appendChild(div);
+  chatMessages.appendChild(div);
 };
 
 function updateUsers(users) {
@@ -81,7 +109,7 @@ function updateChannelName(channel) {
 function changeChannel() {
   const newChannel = event.target.value;
   socket.emit('change-channel', newChannel);
-  document.getElementById("message").focus();
+  chatMessage.focus();
 }
 
 // Emoji
@@ -94,7 +122,7 @@ const picker = new EmojiButton({
 });
 
 picker.on('emoji', emoji => {
-  document.getElementById('message').value += emoji;
+  chatMessage.value += emoji;
 });
 
 emojiBtn.addEventListener('click', () => {

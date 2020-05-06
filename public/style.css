@@ -20,7 +20,7 @@ body {
 button,
 a {
   cursor: url("../cursors/cursor-pointer.png"), pointer !important;
-  outline:none !important;
+  outline: none !important;
 }
 
 input {
@@ -63,4 +63,10 @@ select {
 ::-webkit-scrollbar-thumb {
   background-color: #1e4346;
   border-radius: 5px;
+}
+
+@media (min-width: 1440px) {
+  .chat-container {
+    width: 72% !important;
+  }
 }

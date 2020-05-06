@@ -46,6 +46,13 @@ io.on('connection', socket => {
     }
   });
 
+  socket.on('user-typing', (isTyping) => {
+    const user = getUser(socket.id);
+    if (user) {
+      socket.broadcast.to(user.channel).emit('user-typing', isTyping, user.username);
+    }
+  });
+
   socket.on('change-channel', newChannel => {
     const user = getUser(socket.id);
     if (user) {
